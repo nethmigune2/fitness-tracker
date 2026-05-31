@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Nethmi's Glow Up Tracker ✨</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#faf8ff;
+  --bg2:#f3f0ff;
+  --surface:#ffffff;
+  --surface2:#f8f6ff;
+  --border:#e8e3f5;
+  --border2:#d4ccf0;
+  --purple:#7c5cbf;
+  --purple-light:#9b7fd4;
+  --purple-pale:#ede8ff;
+  --purple-mid:#c4b3ec;
+  --rose:#e8648a;
+  --rose-pale:#fdeef3;
+  --teal:#3aada0;
+  --teal-pale:#e3f6f4;
+  --amber:#d4832a;
+  --amber-pale:#fff4e6;
+  --green:#3a9e72;
+  --green-pale:#e6f7f0;
+  --text:#2d2140;
+  --text2:#6b5f8a;
+  --text3:#9b92b8;
+  --shadow:0 2px 16px rgba(124,92,191,0.08);
+  --shadow-md:0 4px 24px rgba(124,92,191,0.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* decorative top strip */
+.top-strip{height:4px;background:linear-gradient(90deg,#7c5cbf,#e8648a,#3aada0,#d4832a);position:fixed;top:0;left:0;right:0;z-index:100}
+
+.app{max-width:920px;margin:0 auto;padding:0 1.25rem 5rem}
+
+/* NAV */
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.25rem 0 1rem;margin-bottom:1.5rem;
+  border-bottom:1px solid var(--border);
+  position:sticky;top:4px;background:var(--bg);z-index:50;
+}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--purple);letter-spacing:-0.01em}
+.nav-logo em{font-style:italic;color:var(--rose)}
+.nav-tabs{display:flex;gap:3px;background:var(--surface);border-radius:14px;padding:4px;border:1px solid var(--border);box-shadow:var(--shadow)}
+.nav-tab{padding:7px 16px;border-radius:11px;font-size:12.5px;font-weight:500;cursor:pointer;transition:all 0.2s;color:var(--text2);border:none;background:none;font-family:'Plus Jakarta Sans',sans-serif}
+.nav-tab.active{background:var(--purple);color:#fff;box-shadow:0 2px 8px rgba(124,92,191,0.3)}
+.nav-tab:hover:not(.active){background:var(--purple-pale);color:var(--purple)}
+
+.section{display:none;animation:up 0.3s ease}
+.section.active{display:block}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* MOTIVATIONAL BANNER */
+.moto-banner{
+  border-radius:20px;padding:1.75rem 2rem;margin-bottom:1.25rem;
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#7c5cbf 0%,#9b7fd4 50%,#c4a8f0 100%);
+  color:#fff;
+}
+.moto-banner::before{
+  content:'';position:absolute;top:-30px;right:-30px;
+  width:160px;height:160px;border-radius:50%;
+  background:rgba(255,255,255,0.08);
+}
+.moto-banner::after{
+  content:'';position:absolute;bottom:-20px;right:80px;
+  width:100px;height:100px;border-radius:50%;
+  background:rgba(255,255,255,0.05);
+}
+.moto-date{font-size:12px;opacity:0.8;margin-bottom:6px;letter-spacing:0.05em;text-transform:uppercase}
+.moto-quote{font-family:'Playfair Display',serif;font-size:1.4rem;line-height:1.4;margin-bottom:0.5rem;font-style:italic}
+.moto-sub{font-size:13px;opacity:0.85}
+
+/* CARDS */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1.25rem 1.4rem;margin-bottom:1rem;box-shadow:var(--shadow)}
+.card-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.card-title{font-size:15px;font-weight:600;color:var(--text)}
+.badge{display:inline-block;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600}
+.bp{background:var(--purple-pale);color:var(--purple)}
+.bt{background:var(--teal-pale);color:var(--teal)}
+.ba{background:var(--amber-pale);color:var(--amber)}
+.bg{background:var(--green-pale);color:var(--green)}
+.br{background:var(--rose-pale);color:var(--rose)}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1rem}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1rem}
+
+/* STAT CHIPS */
+.stat-chip{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1rem;text-align:center;box-shadow:var(--shadow)}
+.stat-val{font-size:1.6rem;font-weight:600;color:var(--purple);line-height:1}
+.stat-lbl{font-size:11px;color:var(--text3);margin-top:4px;text-transform:uppercase;letter-spacing:0.06em}
+
+/* PROGRESS */
+.prog-wrap{margin:8px 0}
+.prog-labels{display:flex;justify-content:space-between;font-size:12px;color:var(--text3);margin-bottom:5px}
+.prog-track{height:10px;background:var(--bg2);border-radius:20px;overflow:hidden;border:1px solid var(--border)}
+.prog-fill{height:100%;border-radius:20px;transition:width 0.7s cubic-bezier(.4,0,.2,1)}
+.fp{background:linear-gradient(90deg,var(--purple-light),var(--purple))}
+.ft{background:linear-gradient(90deg,#5dd6c8,var(--teal))}
+.fa{background:linear-gradient(90deg,#f0b060,var(--amber))}
+.fg{background:linear-gradient(90deg,#5dc98f,var(--green))}
+.fr{background:linear-gradient(90deg,#f093b0,var(--rose))}
+
+/* WEIGHT */
+.w-display{
+  background:var(--bg2);border-radius:14px;padding:1.25rem;
+  text-align:center;margin-bottom:1rem;border:1px solid var(--border);
+}
+.w-big{font-family:'Playfair Display',serif;font-size:3.2rem;font-weight:700;color:var(--purple);line-height:1}
+.w-unit{font-size:14px;color:var(--text2);margin-top:2px}
+.w-diff{font-size:13px;margin-top:6px;font-weight:500}
+
+.log-form{display:flex;gap:8px;margin-bottom:1rem}
+.inp{flex:1;background:var(--bg2);border:1.5px solid var(--border);border-radius:11px;padding:10px 14px;color:var(--text);font-size:14px;font-family:'Plus Jakarta Sans',sans-serif;outline:none;transition:border-color 0.2s}
+.inp:focus{border-color:var(--purple)}
+.btn{padding:10px 18px;border-radius:11px;border:none;cursor:pointer;font-size:13px;font-weight:600;font-family:'Plus Jakarta Sans',sans-serif;transition:all 0.2s}
+.btn-p{background:var(--purple);color:#fff;box-shadow:0 2px 8px rgba(124,92,191,0.3)}
+.btn-p:hover{background:#6a4daa;transform:translateY(-1px)}
+.btn-sm{padding:6px 12px;font-size:12px}
+.btn-out{background:transparent;border:1.5px solid var(--border2);color:var(--text2)}
+.btn-out:hover{border-color:var(--purple);color:var(--purple);background:var(--purple-pale)}
+.btn-rose{background:var(--rose);color:#fff;box-shadow:0 2px 8px rgba(232,100,138,0.3)}
+
+.w-hist{max-height:150px;overflow-y:auto}
+.w-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px}
+.w-row:last-child{border-bottom:none}
+.w-date{color:var(--text3)}
+.w-val{font-weight:600;color:var(--text)}
+.d-down{color:var(--green);font-size:11px}
+.d-up{color:var(--rose);font-size:11px}
+
+/* CHECKLIST */
+.chk-item{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:opacity 0.2s}
+.chk-item:last-child{border-bottom:none}
+.chk-item.done .chk-text{text-decoration:line-through;color:var(--text3)}
+.chk-item.done{opacity:0.7}
+.chk-box{width:24px;height:24px;border-radius:8px;border:2px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.2s;margin-top:1px}
+.chk-item.done .chk-box{background:var(--purple);border-color:var(--purple)}
+.chk-em{font-size:1.1rem;flex-shrink:0}
+.chk-text{font-size:13.5px;line-height:1.4;color:var(--text)}
+.chk-sub{font-size:11px;color:var(--text3);margin-top:2px}
+
+/* WEEK GRID */
+.wk-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.wk-day{aspect-ratio:1;border-radius:12px;border:1.5px solid var(--border);background:var(--surface2);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;gap:2px}
+.wk-day .dn{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--text3)}
+.wk-day .ds{font-size:11px;color:var(--text3)}
+.wk-day:hover{border-color:var(--purple);background:var(--purple-pale)}
+.wk-day.done{background:var(--green-pale);border-color:#7ecfa8;box-shadow:0 2px 8px rgba(58,158,114,0.15)}
+.wk-day.done .dn{color:var(--green)}
+.wk-day.done .ds{color:var(--green)}
+.wk-day.rest{background:var(--teal-pale);border-color:#7dd6cc}
+.wk-day.rest .dn{color:var(--teal)}
+.wk-day.today-mark{border-color:var(--purple);box-shadow:0 0 0 3px var(--purple-pale)}
+
+/* WORKOUT */
+.wd-card{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:1rem;margin-bottom:8px;transition:all 0.2s}
+.wd-card:hover{border-color:var(--purple-mid);box-shadow:var(--shadow)}
+.wd-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.wd-title{font-size:14px;font-weight:600;color:var(--text)}
+.wd-ex{display:flex;flex-wrap:wrap;gap:5px}
+.wd-ex span{font-size:11.5px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:3px 10px;color:var(--text2)}
+
+/* MEALS */
+.meal-card{border-left:3px solid var(--purple-mid);background:var(--surface2);border-radius:0 12px 12px 0;padding:1rem;margin-bottom:8px}
+.meal-time{font-size:10.5px;color:var(--purple);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;margin-bottom:3px}
+.meal-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:3px}
+.meal-desc{font-size:12.5px;color:var(--text2);line-height:1.6}
+.meal-kcal{font-size:11px;color:var(--text3);margin-top:4px;font-weight:500}
+
+.avoid-i{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;color:var(--text2)}
+.avoid-i:last-child{border-bottom:none}
+.avoid-i::before{content:'✗';color:var(--rose);font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* SKINCARE */
+.sk-step{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.sk-step:last-child{border-bottom:none}
+.sk-num{width:30px;height:30px;border-radius:50%;background:var(--purple-pale);border:1.5px solid var(--purple-mid);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--purple);flex-shrink:0}
+.sk-prod{font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:3px}
+.sk-how{font-size:12px;color:var(--text2);line-height:1.6}
+
+/* TIMELINE */
+.tl{position:relative;padding-left:26px}
+.tl::before{content:'';position:absolute;left:9px;top:4px;bottom:4px;width:2px;background:var(--border);border-radius:2px}
+.tl-item{position:relative;margin-bottom:1.5rem}
+.tl-dot{position:absolute;left:-21px;top:5px;width:14px;height:14px;border-radius:50%;background:var(--purple);border:2px solid var(--bg);box-shadow:0 0 0 2px var(--purple-mid)}
+.tl-dot.g{background:var(--green);box-shadow:0 0 0 2px #7ecfa8}
+.tl-week{font-size:10.5px;color:var(--purple);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;margin-bottom:2px}
+.tl-goal{font-size:14.5px;font-weight:600;color:var(--text);margin-bottom:3px}
+.tl-detail{font-size:12.5px;color:var(--text2);line-height:1.7}
+
+/* CHART */
+.chart-wrap{height:160px;margin-top:0.75rem}
+svg.wc{width:100%;height:100%}
+
+/* ─── DAILY LOG ─────────────────────────────── */
+.log-section{background:linear-gradient(135deg,#faf8ff,#f3f0ff);border-radius:20px;padding:1.5rem;margin-bottom:1rem;border:1px solid var(--border)}
+.log-day-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.log-day-title{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--purple)}
+.log-day-date{font-size:12px;color:var(--text3);margin-top:2px}
+
+.log-card{background:var(--surface);border-radius:14px;padding:1.25rem;margin-bottom:1rem;border:1px solid var(--border);box-shadow:var(--shadow)}
+.log-card h4{font-size:14px;font-weight:600;color:var(--text);margin-bottom:0.75rem;display:flex;align-items:center;gap:8px}
+
+.log-textarea{width:100%;background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;padding:10px 14px;font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);resize:vertical;min-height:80px;outline:none;transition:border-color 0.2s;line-height:1.6}
+.log-textarea:focus{border-color:var(--purple)}
+
+.mood-row{display:flex;gap:8px;margin-bottom:1rem}
+.mood-btn{padding:8px 14px;border-radius:10px;border:1.5px solid var(--border);background:var(--surface2);cursor:pointer;font-size:14px;transition:all 0.2s;font-family:'Plus Jakarta Sans',sans-serif}
+.mood-btn.selected{border-color:var(--purple);background:var(--purple-pale);transform:scale(1.1)}
+.mood-btn:hover{transform:scale(1.05)}
+
+.log-goal-check{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--surface2);border-radius:10px;margin-bottom:6px;cursor:pointer;transition:all 0.2s;border:1.5px solid transparent}
+.log-goal-check.ticked{background:var(--green-pale);border-color:#7ecfa8}
+.log-goal-check .gc-box{width:20px;height:20px;border-radius:6px;border:2px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+.log-goal-check.ticked .gc-box{background:var(--green);border-color:var(--green)}
+.log-goal-check .gc-text{font-size:13px;color:var(--text)}
+.log-goal-check.ticked .gc-text{color:var(--green);font-weight:500}
+
+.save-btn-row{display:flex;gap:8px;margin-top:1rem}
+
+/* PAST LOGS */
+.past-log-item{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.25rem;margin-bottom:10px;box-shadow:var(--shadow)}
+.pli-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.pli-date{font-family:'Playfair Display',serif;font-size:1rem;color:var(--purple)}
+.pli-score{font-size:12px;padding:3px 10px;border-radius:20px;font-weight:600}
+.pli-mood{font-size:1.3rem}
+.pli-section{margin-bottom:8px}
+.pli-section label{font-size:10.5px;text-transform:uppercase;letter-spacing:0.06em;color:var(--text3);font-weight:600;display:block;margin-bottom:3px}
+.pli-section p{font-size:13px;color:var(--text2);line-height:1.6}
+.pli-goals{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.pli-goal-chip{font-size:11px;padding:3px 10px;border-radius:20px;border:1px solid}
+
+/* MOTIVATIONAL QUOTES */
+.quote-card{
+  background:linear-gradient(135deg,var(--rose-pale),var(--purple-pale));
+  border:1px solid var(--border);border-radius:16px;padding:1.25rem;
+  text-align:center;margin-bottom:1rem;
+}
+.quote-text{font-family:'Playfair Display',serif;font-size:1.05rem;font-style:italic;color:var(--purple);line-height:1.5;margin-bottom:6px}
+.quote-author{font-size:11.5px;color:var(--text3);font-weight:500}
+
+/* SCROLL */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--purple-mid);border-radius:2px}
+
+/* STREAK FLAME */
+.streak-wrap{text-align:center;padding:1.25rem 1rem}
+.streak-flame{font-size:2.5rem;display:block;margin-bottom:4px;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.streak-num{font-family:'Playfair Display',serif;font-size:2.5rem;color:var(--amber);font-weight:700;line-height:1}
+.streak-lbl{font-size:12px;color:var(--text3);margin-top:4px}
+
+/* COMPLETION BURST */
+.completion-bar{height:6px;border-radius:20px;margin-top:8px;overflow:hidden;background:var(--border)}
+.completion-fill{height:100%;background:linear-gradient(90deg,var(--rose),var(--purple),var(--teal));transition:width 0.8s ease;border-radius:20px}
+
+.all-done-banner{background:linear-gradient(135deg,var(--green-pale),var(--teal-pale));border:1.5px solid #7ecfa8;border-radius:14px;padding:1rem;text-align:center;margin-bottom:1rem;display:none}
+.all-done-banner.show{display:block}
+.all-done-banner p{font-size:14px;color:var(--green);font-weight:600}
+.all-done-banner span{font-size:1.5rem}
+
+/* SCHEDULE */
+.sched-row{display:flex;gap:14px;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+.sched-row:last-child{border-bottom:none}
+.sched-time{min-width:72px;color:var(--purple);font-weight:600;font-size:12px}
+.sched-item{color:var(--text2)}
+
+/* AVOID */
+.avoid-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.avoid-chip{background:var(--rose-pale);border:1px solid #f0b8cc;border-radius:10px;padding:8px 12px;font-size:12px;color:var(--rose);display:flex;align-items:flex-start;gap:6px}
+.avoid-chip::before{content:'✗';font-weight:700;flex-shrink:0}
+
+/* FLOAT ACTION */
+.fab{
+  position:fixed;bottom:1.5rem;right:1.5rem;
+  background:var(--purple);color:#fff;
+  width:52px;height:52px;border-radius:50%;border:none;
+  font-size:22px;cursor:pointer;z-index:200;
+  box-shadow:0 4px 20px rgba(124,92,191,0.4);
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;
+}
+.fab:hover{transform:scale(1.1);background:#6a4daa}
+
+/* LOG DATE NAV */
+.date-nav{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
+.date-nav-btn{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:6px 12px;cursor:pointer;font-size:13px;color:var(--text2);transition:all 0.2s;font-family:'Plus Jakarta Sans',sans-serif}
+.date-nav-btn:hover{border-color:var(--purple);color:var(--purple);background:var(--purple-pale)}
+.date-nav-label{font-size:13px;font-weight:600;color:var(--text);flex:1;text-align:center}
+
+/* INFO BOX */
+.info-box{background:var(--amber-pale);border:1px solid #f0cc88;border-radius:12px;padding:1rem;font-size:13px;color:var(--amber);line-height:1.6}
+.info-box strong{color:#a05e10}
+</style>
+</head>
+<body>
+<div class="top-strip"></div>
+<div class="app" style="padding-top:0.5rem">
+  <nav>
+    <div class="nav-logo">nethmi <em>glow up</em> ✨</div>
+    <div class="nav-tabs">
+      <button class="nav-tab active" onclick="showTab('dashboard',this)">Home</button>
+      <button class="nav-tab" onclick="showTab('daily-log',this)">Daily Log</button>
+      <button class="nav-tab" onclick="showTab('workout',this)">Workout</button>
+      <button class="nav-tab" onclick="showTab('nutrition',this)">Meals</button>
+      <button class="nav-tab" onclick="showTab('skincare',this)">Skincare</button>
+      <button class="nav-tab" onclick="showTab('timeline',this)">Timeline</button>
+    </div>
+  </nav>
+
+  <!-- ══════════ DASHBOARD ══════════ -->
+  <div id="dashboard" class="section active">
+    <div class="moto-banner">
+      <div class="moto-date" id="today-date">Sunday, June 1 · Week 1</div>
+      <div class="moto-quote" id="daily-quote">"She believed she could, so she did."</div>
+      <div class="moto-sub" id="moto-sub">64 days to go · You are capable of amazing things, Nethmi 💜</div>
+    </div>
+
+    <div class="grid4">
+      <div class="stat-chip"><div class="stat-val" id="h-cur">72.0</div><div class="stat-lbl">current kg</div></div>
+      <div class="stat-chip"><div class="stat-val" id="h-lost" style="color:var(--green)">0.0</div><div class="stat-lbl">kg lost</div></div>
+      <div class="stat-chip"><div class="stat-val" id="h-days" style="color:var(--rose)">62</div><div class="stat-lbl">days left</div></div>
+      <div class="stat-chip"><div class="stat-val" id="h-streak" style="color:var(--amber)">0🔥</div><div class="stat-lbl">day streak</div></div>
+    </div>
+
+    <div class="grid2">
+      <!-- WEIGHT -->
+      <div class="card">
+        <div class="card-h"><div class="card-title">⚖️ Weight Tracker</div><span class="badge bp">Goal: 64 kg</span></div>
+        <div class="w-display">
+          <div class="w-big" id="big-w">72.0</div>
+          <div class="w-unit">kg</div>
+          <div class="w-diff" id="w-diff" style="color:var(--text3)">Starting weight</div>
+        </div>
+        <div class="prog-wrap">
+          <div class="prog-labels"><span>72 kg</span><span id="pct-lbl">0%</span><span>64 kg</span></div>
+          <div class="prog-track"><div class="prog-fill fp" id="goal-bar" style="width:0%"></div></div>
+        </div>
+        <div class="log-form" style="margin-top:0.75rem">
+          <input class="inp" type="number" id="w-in" placeholder="Log weight (kg)" step="0.1"/>
+          <button class="btn btn-p" onclick="logWeight()">Add</button>
+        </div>
+        <div class="w-hist" id="w-hist"></div>
+      </div>
+
+      <!-- STREAK + WEEK -->
+      <div>
+        <div class="card" style="margin-bottom:1rem">
+          <div class="card-h"><div class="card-title">🔥 Workout Streak</div></div>
+          <div class="streak-wrap">
+            <span class="streak-flame">🔥</span>
+            <div class="streak-num" id="streak-num">0</div>
+            <div class="streak-lbl">days in a row — keep going!</div>
+          </div>
+          <div class="prog-wrap">
+            <div class="prog-labels"><span>This week</span><span id="wk-lbl">0/6 days</span></div>
+            <div class="prog-track"><div class="prog-fill fg" id="wk-bar" style="width:0%"></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-h"><div class="card-title">📊 Today's completion</div></div>
+          <div style="font-size:13px;color:var(--text2);margin-bottom:6px" id="comp-txt">0 of 10 goals done</div>
+          <div class="completion-bar"><div class="completion-fill" id="comp-bar" style="width:0%"></div></div>
+          <button class="btn btn-out btn-sm" style="margin-top:0.75rem;width:100%" onclick="showTab('daily-log',document.querySelectorAll('.nav-tab')[1])">📝 Open today's log →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEIGHT CHART -->
+    <div class="card">
+      <div class="card-h"><div class="card-title">📈 Weight progress chart</div><span class="badge bg">Target: 64 kg</span></div>
+      <div class="chart-wrap"><svg class="wc" id="wc"></svg></div>
+    </div>
+
+    <!-- DAILY CHECKLIST PREVIEW -->
+    <div class="card">
+      <div class="card-h">
+        <div class="card-title">✅ Today's checklist</div>
+        <span class="badge bp" id="chk-badge">0/10</span>
+      </div>
+      <div class="all-done-banner" id="all-done">
+        <span>🎉</span>
+        <p>AMAZING! You completed ALL your goals today, Nethmi! You're unstoppable! 💜</p>
+      </div>
+      <div id="chk-list"></div>
+    </div>
+
+    <!-- WEEK GRID -->
+    <div class="card">
+      <div class="card-h">
+        <div class="card-title">📅 Weekly workout grid</div>
+        <button class="btn btn-out btn-sm" onclick="resetWeek()">Reset</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--text3);margin-bottom:4px">
+        <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+      </div>
+      <div class="wk-grid" id="wk-grid"></div>
+    </div>
+
+    <!-- QUOTE OF DAY -->
+    <div class="quote-card">
+      <div class="quote-text" id="q-text">"The only bad workout is the one that didn't happen."</div>
+      <div class="quote-author">— tap to refresh 💜</div>
+      <button class="btn btn-out btn-sm" style="margin-top:0.75rem" onclick="nextQuote()">New quote ✨</button>
+    </div>
+  </div>
+
+  <!-- ══════════ DAILY LOG ══════════ -->
+  <div id="daily-log" class="section">
+    <div class="moto-banner" style="background:linear-gradient(135deg,#e8648a,#c4548a)">
+      <div class="moto-date">Daily Journal & Progress Log</div>
+      <div class="moto-quote">"Track it. Own it. Celebrate it."</div>
+      <div class="moto-sub">Every day logged is a day you showed up for yourself 💪</div>
+    </div>
+
+    <div class="log-section">
+      <div class="log-day-header">
+        <div>
+          <div class="log-day-title" id="log-title">Today's Log</div>
+          <div class="log-day-date" id="log-date-label">Sunday, June 1 2026</div>
+        </div>
+        <div class="date-nav" style="margin-bottom:0;gap:6px">
+          <button class="date-nav-btn" onclick="changeLogDay(-1)">← Prev</button>
+          <button class="date-nav-btn" onclick="goToday()">Today</button>
+          <button class="date-nav-btn" onclick="changeLogDay(1)">Next →</button>
+        </div>
+      </div>
+
+      <!-- MOOD -->
+      <div class="log-card">
+        <h4>😊 How are you feeling today?</h4>
+        <div class="mood-row" id="mood-row">
+          <button class="mood-btn" data-m="😴" onclick="setMood('😴',this)">😴 Tired</button>
+          <button class="mood-btn" data-m="😐" onclick="setMood('😐',this)">😐 Okay</button>
+          <button class="mood-btn" data-m="😊" onclick="setMood('😊',this)">😊 Good</button>
+          <button class="mood-btn" data-m="💪" onclick="setMood('💪',this)">💪 Strong</button>
+          <button class="mood-btn" data-m="🔥" onclick="setMood('🔥',this)">🔥 Unstoppable</button>
+        </div>
+      </div>
+
+      <!-- GOALS COMPLETED TODAY -->
+      <div class="log-card">
+        <h4>✅ Goals I completed today</h4>
+        <div id="log-goals-list"></div>
+      </div>
+
+      <!-- WHAT I DID -->
+      <div class="log-card">
+        <h4>🏋️ What I did today</h4>
+        <textarea class="log-textarea" id="log-did" placeholder="e.g. Ran on treadmill for 50 minutes at 5.5 kmh. Did squats 4×15 and lunges. Felt strong today!&#10;&#10;Tell yourself what you accomplished..."></textarea>
+      </div>
+
+      <!-- MEALS -->
+      <div class="log-card">
+        <h4>🍽️ What I ate today</h4>
+        <textarea class="log-textarea" id="log-ate" placeholder="e.g. Breakfast: steamed beans + coconut + 1 egg&#10;Lunch: small rice + dhal curry + salad&#10;Dinner: omelette + vegetable salad&#10;&#10;No rice at dinner ✓ No sugar ✓"></textarea>
+      </div>
+
+      <!-- WINS & NOTES -->
+      <div class="log-card">
+        <h4>🌟 My wins & notes</h4>
+        <textarea class="log-textarea" id="log-wins" placeholder="e.g. I didn't eat sugar today! I completed my full workout even when I felt tired. My jeans felt slightly looser!&#10;&#10;Every win counts, big or small 💜"></textarea>
+      </div>
+
+      <!-- MOTIVATION CHECK -->
+      <div class="log-card" style="background:linear-gradient(135deg,var(--purple-pale),var(--rose-pale));border-color:var(--purple-mid)">
+        <h4 style="color:var(--purple)">💜 Motivation check</h4>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:0.75rem">On a scale of 1–10, how motivated do you feel?</p>
+        <div style="display:flex;gap:6px;flex-wrap:wrap" id="moto-scale">
+          <!-- filled by JS -->
+        </div>
+        <textarea class="log-textarea" id="log-moto" style="margin-top:0.75rem" placeholder="Write anything you need to tell yourself when motivation feels low...&#10;&#10;Your future self is cheering for you! 🎉"></textarea>
+      </div>
+
+      <div class="save-btn-row">
+        <button class="btn btn-p" style="flex:1" onclick="saveLog()">💾 Save today's log</button>
+        <button class="btn btn-rose" onclick="clearLog()">Clear</button>
+      </div>
+      <div id="save-confirm" style="font-size:13px;color:var(--green);text-align:center;margin-top:8px;display:none;font-weight:600">✓ Saved! Amazing job, Nethmi! 🎉</div>
+    </div>
+
+    <!-- PAST LOGS -->
+    <div class="card">
+      <div class="card-h"><div class="card-title">📚 Past log entries</div><span class="badge bp" id="log-count-badge">0 entries</span></div>
+      <div id="past-logs-list"><div style="font-size:13px;color:var(--text3);text-align:center;padding:1.5rem">No entries yet. Start logging today! 💜</div></div>
+    </div>
+  </div>
+
+  <!-- ══════════ WORKOUT ══════════ -->
+  <div id="workout" class="section">
+    <div class="card">
+      <div class="card-h"><div class="card-title">💪 6-Day Workout Split</div><span class="badge bp">~450 kcal/session</span></div>
+      <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;line-height:1.7">Your treadmill at <strong>5.5 kmh + 6° incline</strong> burns ~420–450 kcal per hour. Add strength training to build muscle and boost metabolism so you burn more even at rest.</p>
+      <div id="wd-list"></div>
+    </div>
+    <div class="card">
+      <div class="card-h"><div class="card-title">📈 Treadmill progression plan</div></div>
+      <div class="grid2">
+        <div style="background:var(--purple-pale);border-radius:12px;padding:1rem;border:1px solid var(--purple-mid)">
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:var(--purple);font-weight:600;margin-bottom:4px">Weeks 1–2 (Now)</div>
+          <div style="font-size:1.3rem;font-weight:700;color:var(--purple)">5.5 kmh</div>
+          <div style="font-size:12px;color:var(--text2)">Incline 6° · 45–60 min</div>
+        </div>
+        <div style="background:var(--amber-pale);border-radius:12px;padding:1rem;border:1px solid #e5c07a">
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:var(--amber);font-weight:600;margin-bottom:4px">Weeks 3–4</div>
+          <div style="font-size:1.3rem;font-weight:700;color:var(--amber)">5.8 kmh</div>
+          <div style="font-size:12px;color:var(--text2)">Incline 7° · 50–60 min</div>
+        </div>
+        <div style="background:var(--teal-pale);border-radius:12px;padding:1rem;border:1px solid #7dd6cc">
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:var(--teal);font-weight:600;margin-bottom:4px">Weeks 5–6</div>
+          <div style="font-size:1.3rem;font-weight:700;color:var(--teal)">6.0 kmh</div>
+          <div style="font-size:12px;color:var(--text2)">Incline 7° · 55–60 min</div>
+        </div>
+        <div style="background:var(--green-pale);border-radius:12px;padding:1rem;border:1px solid #7ecfa8">
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:var(--green);font-weight:600;margin-bottom:4px">Weeks 7–9</div>
+          <div style="font-size:1.3rem;font-weight:700;color:var(--green)">6.2 kmh</div>
+          <div style="font-size:12px;color:var(--text2)">Incline 8° · 60 min</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-h"><div class="card-title">⏰ Daily schedule</div></div>
+      <div id="sched-list"></div>
+    </div>
+  </div>
+
+  <!-- ══════════ MEALS ══════════ -->
+  <div id="nutrition" class="section">
+    <div class="grid4">
+      <div class="stat-chip"><div class="stat-val" style="color:var(--teal)">1,600</div><div class="stat-lbl">target kcal</div></div>
+      <div class="stat-chip"><div class="stat-val" style="color:var(--purple)">2,000</div><div class="stat-lbl">TDEE</div></div>
+      <div class="stat-chip"><div class="stat-val" style="color:var(--amber)">−400</div><div class="stat-lbl">deficit</div></div>
+      <div class="stat-chip"><div class="stat-val" style="color:var(--green)">~0.8</div><div class="stat-lbl">kg/week</div></div>
+    </div>
+    <div class="card">
+      <div class="card-h"><div class="card-title">🍽️ Daily meal plan</div><span class="badge bt">~1,600 kcal total</span></div>
+      <div id="meals-list"></div>
+    </div>
+    <div class="card">
+      <div class="card-h"><div class="card-title">🚫 Foods to avoid</div><span class="badge br">Strictly</span></div>
+      <div class="avoid-grid" id="avoid-list"></div>
+    </div>
+    <div class="card" style="background:var(--teal-pale);border-color:#7dd6cc">
+      <div class="card-h"><div class="card-title" style="color:var(--teal)">🇱🇰 Sri Lanka specific tips</div></div>
+      <ul style="font-size:13px;color:var(--text2);line-height:2.2;padding-left:1rem">
+        <li>Swap white rice → <strong style="color:var(--text)">red rice or kurakkan roti</strong> (lower sugar spike)</li>
+        <li>Ideal lunch: <strong style="color:var(--text)">dhal + fish + tempered vegetables</strong></li>
+        <li>King coconut: <strong style="color:var(--text)">1 per day max</strong> — hydrating but has calories</li>
+        <li>Pol sambol: <strong style="color:var(--text)">small amounts only</strong> — coconut is calorie-dense</li>
+        <li>Eat lunch <strong style="color:var(--text)">before 1:30 PM</strong>, dinner <strong style="color:var(--text)">before 7 PM</strong></li>
+        <li><strong style="color:var(--text)">No eating after 8 PM</strong> — firm rule</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ══════════ SKINCARE ══════════ -->
+  <div id="skincare" class="section">
+    <div class="grid2">
+      <div class="card">
+        <div class="card-h"><div class="card-title">☀️ Morning routine</div></div>
+        <div id="am-skin"></div>
+      </div>
+      <div class="card">
+        <div class="card-h"><div class="card-title">🌙 Night routine</div></div>
+        <div id="pm-skin"></div>
+      </div>
+    </div>
+    <div class="card" style="background:var(--rose-pale);border-color:#f0b8cc">
+      <div class="card-h"><div class="card-title" style="color:var(--rose)">⚠️ Glycolic acid rules — important!</div></div>
+      <ul style="font-size:13px;color:#8a3452;line-height:2.2;padding-left:1rem">
+        <li><strong>NIGHT ONLY</strong> — never morning before sunscreen</li>
+        <li>Max <strong>3×/week</strong> — Monday, Wednesday, Friday nights</li>
+        <li>Apply with cotton pad, avoid eye area carefully</li>
+        <li>Wait 1–2 min, then apply moisturiser on top</li>
+        <li>Results visible in <strong>3–4 weeks</strong> — brighter, even skin</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-h"><div class="card-title">✨ Optional upgrades</div><span class="badge bt">When ready</span></div>
+      <div class="grid2">
+        <div style="background:var(--surface2);border-radius:10px;padding:0.75rem;border:1px solid var(--border)"><div style="font-size:12px;font-weight:600;color:var(--purple);margin-bottom:3px">Vitamin C serum</div><div style="font-size:12px;color:var(--text2)">Morning · Fades dark spots · Apply after cleanser, before moisturiser</div></div>
+        <div style="background:var(--surface2);border-radius:10px;padding:0.75rem;border:1px solid var(--border)"><div style="font-size:12px;font-weight:600;color:var(--teal);margin-bottom:3px">Rose water spray</div><div style="font-size:12px;color:var(--text2)">Mist before moisturiser · Great for humidity</div></div>
+        <div style="background:var(--surface2);border-radius:10px;padding:0.75rem;border:1px solid var(--border)"><div style="font-size:12px;font-weight:600;color:var(--amber);margin-bottom:3px">2L water daily</div><div style="font-size:12px;color:var(--text2)">Single biggest skin glow factor — non-negotiable</div></div>
+        <div style="background:var(--surface2);border-radius:10px;padding:0.75rem;border:1px solid var(--border)"><div style="font-size:12px;font-weight:600;color:var(--green);margin-bottom:3px">7–8 hrs sleep</div><div style="font-size:12px;color:var(--text2)">Skin repairs 10PM–2AM · In bed by 10:30 PM</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ TIMELINE ══════════ -->
+  <div id="timeline" class="section">
+    <div class="card">
+      <div class="card-h"><div class="card-title">🗓️ 9-Week transformation timeline</div></div>
+      <div class="tl" id="tl-list"></div>
+    </div>
+    <div class="card">
+      <div class="card-h"><div class="card-title">🌟 What you'll see by August 1</div><span class="badge bg">Projected</span></div>
+      <div class="grid2" style="gap:8px">
+        <div style="display:flex;gap:10px;padding:10px;background:var(--surface2);border-radius:12px;align-items:flex-start"><div style="font-size:1.4rem">💆</div><div><div style="font-size:13px;font-weight:600;color:var(--text)">Slimmer face</div><div style="font-size:12px;color:var(--text2)">Defined jaw & cheekbones</div></div></div>
+        <div style="display:flex;gap:10px;padding:10px;background:var(--surface2);border-radius:12px;align-items:flex-start"><div style="font-size:1.4rem">✨</div><div><div style="font-size:13px;font-weight:600;color:var(--text)">Glowing skin</div><div style="font-size:12px;color:var(--text2)">From skincare + sleep + water</div></div></div>
+        <div style="display:flex;gap:10px;padding:10px;background:var(--surface2);border-radius:12px;align-items:flex-start"><div style="font-size:1.4rem">👗</div><div><div style="font-size:13px;font-weight:600;color:var(--text)">Clothes fit differently</div><div style="font-size:12px;color:var(--text2)">Waist −3 to 4 inches</div></div></div>
+        <div style="display:flex;gap:10px;padding:10px;background:var(--surface2);border-radius:12px;align-items:flex-start"><div style="font-size:1.4rem">💪</div><div><div style="font-size:13px;font-weight:600;color:var(--text)">Toned arms & legs</div><div style="font-size:12px;color:var(--text2)">Visible muscle definition</div></div></div>
+        <div style="display:flex;gap:10px;padding:10px;background:var(--surface2);border-radius:12px;align-items:flex-start"><div style="font-size:1.4rem">⚡</div><div><div style="font-size:13px;font-weight:600;color:var(--text)">Way more energy</div><div style="font-size:12px;color:var(--text2)">Better mood, focus & sleep</div></div></div>
+        <div style="display:flex;gap:10px;padding:10px;background:var(--surface2);border-radius:12px;align-items:flex-start"><div style="font-size:1.4rem">🧘</div><div><div style="font-size:13px;font-weight:600;color:var(--text)">Better posture</div><div style="font-size:12px;color:var(--text2)">From core work & stretching</div></div></div>
+      </div>
+    </div>
+
+    <!-- MOTIVATION WALL -->
+    <div class="card" style="background:linear-gradient(135deg,var(--purple-pale),var(--rose-pale));border-color:var(--purple-mid)">
+      <div class="card-h"><div class="card-title" style="color:var(--purple)">💜 When you feel like giving up...</div></div>
+      <div style="font-size:13px;color:var(--text2);line-height:2">
+        <p style="margin-bottom:0.75rem">Read this every time motivation drops:</p>
+        <div style="background:var(--surface);border-radius:12px;padding:1rem;border:1px solid var(--border);margin-bottom:8px">
+          <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:var(--purple)">You started this because you wanted to feel better. The girl who started June 1 made a promise. Don't break it.</p>
+        </div>
+        <div style="background:var(--surface);border-radius:12px;padding:1rem;border:1px solid var(--border);margin-bottom:8px">
+          <p style="font-size:13px;color:var(--text2)">✓ On hard days — just do 20 minutes on the treadmill. That's it. Just start.<br/>✓ Skipping one meal plan doesn't ruin everything. The next meal is your fresh start.<br/>✓ Look at your Day 1 photo. Remember why you started.<br/>✓ 64 kg Nethmi is waiting for you on August 1.</p>
+        </div>
+        <div style="background:var(--surface);border-radius:12px;padding:1rem;border:1px solid var(--border)">
+          <p style="font-size:13px;color:var(--text2)">🇱🇰 You are doing something most people will never do. Every single day you show up, you're becoming a stronger version of yourself. That's not just weight loss — that's character. That's discipline. That's you.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="fab" onclick="showTab('daily-log',document.querySelectorAll('.nav-tab')[1])" title="Open daily log">📝</button>
+
+<script>
+// ── DATA ──
+const CHECKLIST = [
+  {id:'water-am',e:'💧',t:'Drink 2 glasses water on waking',s:'Morning start'},
+  {id:'skin-am',e:'🧴',t:'Morning skincare (cleanser → moisturiser → SPF)',s:'Before going out'},
+  {id:'breakfast',e:'🍳',t:'Eat breakfast — beans + coconut + egg',s:'7–8 AM'},
+  {id:'workout',e:'🏃',t:'Complete today\'s workout',s:'8–9 AM'},
+  {id:'lunch',e:'🍚',t:'Balanced lunch — small rice portion + veggies',s:'12:30–1 PM'},
+  {id:'water',e:'💧',t:'Drink 2L water total today',s:'Throughout day'},
+  {id:'no-bad',e:'🚫',t:'No sugar, no fried food, no rice at dinner',s:'All day commitment'},
+  {id:'dinner',e:'🥗',t:'Light dinner before 7 PM',s:'6:30–7 PM'},
+  {id:'skin-pm',e:'🌙',t:'Night skincare (cleanser → glycolic* → moisturiser)',s:'9:30 PM'},
+  {id:'sleep',e:'😴',t:'In bed by 10:30 PM — phone away',s:'10:30 PM'},
+];
+
+const LOG_GOALS = [
+  'Drank 2L water','Completed full workout','Ate healthy meals','No sugar today',
+  'Morning skincare done','Night skincare done','Slept 7+ hours','No eating after 8 PM',
+  'Took treadmill walk','Felt motivated today'
+];
+
+const WORKOUTS = [
+  {day:'Monday',e:'💪',badge:'Lower body',c:'bp',ex:['Treadmill 45 min (5.5kmh, 6°)','Squats 4×15','Lunges 3×12 each','Glute bridges 3×20','Calf raises 3×20','Wall sit 3×45s']},
+  {day:'Tuesday',e:'🏋️',badge:'Upper body',c:'bt',ex:['Treadmill 45 min','Shoulder press 3×12','Dumbbell rows 3×12','Push-ups 3×10','Tricep dips 3×12','Bicep curls 3×12']},
+  {day:'Wednesday',e:'🔥',badge:'Cardio day',c:'ba',ex:['Treadmill 60 min','Steady state fat burn','Light stretching 10 min after']},
+  {day:'Thursday',e:'🎯',badge:'Core',c:'br',ex:['Treadmill 45 min','Plank 3×40s','Crunches 3×20','Leg raises 3×15','Russian twists 3×20','Dead bug 3×10']},
+  {day:'Friday',e:'⚡',badge:'Full body',c:'bp',ex:['Treadmill 45 min','Deadlifts 3×12','Squat to press 3×12','Renegade rows 3×10','Step-ups 3×12 each','Burpees 3×8']},
+  {day:'Saturday',e:'🌿',badge:'Active recovery',c:'bt',ex:['Treadmill 30 min (4kmh, 4°)','Full body stretch 20 min','Walk outside if possible']},
+  {day:'Sunday',e:'😴',badge:'Rest day',c:'bg',ex:['Complete rest','Light yoga optional','Meal prep for the week','Skincare self-care night']},
+];
+
+const MEALS = [
+  {t:'Breakfast · 7–8 AM',n:'Steamed beans + grated coconut',d:'Add 1 boiled egg for protein. Or: 2-egg omelette + veggies. Or: oats with banana.',k:'~350 kcal',c:'var(--purple-mid)'},
+  {t:'Mid-morning · 10 AM',n:'Small healthy snack',d:'1 banana · handful of nuts · plain yogurt · small papaya. Don\'t skip — prevents overeating at lunch.',k:'~150 kcal',c:'var(--teal)'},
+  {t:'Lunch · 12:30–1 PM',n:'Rice + curry (controlled)',d:'Max ½ cup cooked rice. Eat veggies first. Dhal, fish, or chicken curry preferred. Start with salad to eat less rice.',k:'~500 kcal',c:'var(--amber)'},
+  {t:'Afternoon · 4 PM',n:'Light snack (optional)',d:'Cucumber + carrot sticks · plain tea (no sugar) · king coconut water.',k:'~100 kcal',c:'var(--rose)'},
+  {t:'Dinner · 6:30–7 PM',n:'Light protein + vegetables only',d:'2-egg omelette + salad · boiled sweet potato + veggies · grilled fish/chicken + veggies. NO rice at dinner — this is key!',k:'~450 kcal',c:'var(--green)'},
+];
+
+const AVOID = [
+  'Large portions of white rice','Sugar in tea or coffee','Milo, juice, soft drinks','Short eats, wade, roti daily','Kottu, fried rice, fried noodles','Pol sambol in large amounts','Biscuits, cake, chocolates','Eating after 8 PM',
+];
+
+const AM_SKIN = [
+  {n:1,p:'Round Lab Birch Rice Cleanser',h:'Gentle cleanse. Massage 60 seconds, rinse with lukewarm water. Sets a clean base.'},
+  {n:2,p:'CeraVe Normal to Dry Moisturiser',h:'Apply while face is slightly damp. Pat in gently. Wait 2 min before sunscreen.'},
+  {n:3,p:'Beauty of Joseon Sunscreen',h:'Generous amount — must cover fully. Reapply every 2–3 hrs outdoors. NEVER skip in Sri Lanka\'s sun!'},
+];
+const PM_SKIN = [
+  {n:1,p:'Round Lab Birch Rice Cleanser',h:'Double cleanse if you wore sunscreen. First rinse removes SPF. Second is the real cleanse.'},
+  {n:2,p:'The Ordinary Glycolic Acid 7%',h:'NIGHT ONLY · 3×/week (Mon/Wed/Fri) · Cotton pad, avoid eye area. Brightens skin in 3–4 weeks.'},
+  {n:3,p:'CeraVe Normal to Dry Moisturiser',h:'After toner absorbs (1–2 min). Be generous at night — skin repairs while you sleep.'},
+];
+
+const TL = [
+  {w:'Week 1–2 · Jun 1–14',g:'Build the habit · Target: −1.5 kg',d:'Consistency over intensity. Water weight drops fast. Stick strictly to meals. 45 min treadmill every day.',final:false},
+  {w:'Week 3–4 · Jun 15–28',g:'Add strength training · Target: −3 kg total',d:'Weight training 4×/week. Increase to 5.8 kmh + 7° incline. Clothes start feeling different.',final:false},
+  {w:'Week 5–6 · Jun 29–Jul 12',g:'Push through plateau · Target: −5 kg total',d:'Most people plateau here — don\'t stop! Try red rice or kurakkan roti instead of white rice. Face looks noticeably slimmer.',final:false},
+  {w:'Week 7–8 · Jul 13–26',g:'Final push · Target: −7 kg total',d:'Increase to 6.2 kmh + 8° incline. Dinner: veggies + protein only. Skin is glowing from the consistent routine.',final:false},
+  {w:'Week 9 · Jul 27–Aug 1',g:'GOAL REACHED: −8 kg · 64 kg 🎉',d:'You did it! Maintenance mode starts. Keep the habits. Set your next goal. You earned this!',final:true},
+];
+
+const SCHED = [
+  {t:'6:00 AM',i:'Wake up + 2 glasses of water'},
+  {t:'6:15 AM',i:'Morning skincare (cleanser → moisturiser → sunscreen)'},
+  {t:'7:00 AM',i:'Breakfast — beans + coconut + egg'},
+  {t:'8:00 AM',i:'Treadmill + strength training (based on day)'},
+  {t:'10:00 AM',i:'Mid-morning snack + water'},
+  {t:'12:30 PM',i:'Lunch — controlled rice + curry + veggies first'},
+  {t:'4:00 PM',i:'Light snack (fruit or veggies)'},
+  {t:'6:30 PM',i:'Light dinner — omelette / sweet potato / salad'},
+  {t:'9:30 PM',i:'Night skincare routine'},
+  {t:'10:00 PM',i:'No screens — wind down time'},
+  {t:'10:30 PM',i:'Sleep 💤'},
+];
+
+const QUOTES = [
+  '"She believed she could, so she did."',
+  '"The body achieves what the mind believes."',
+  '"One day or day one — you decide."',
+  '"Your only competition is who you were yesterday."',
+  '"It always seems impossible until it\'s done."',
+  '"Sweat is just fat crying."',
+  '"Results happen over time, not overnight. Work hard, stay consistent, be patient."',
+  '"The secret to getting ahead is getting started."',
+  '"Every workout is progress, even the ones that feel hard."',
+  '"You are stronger than you think, braver than you feel."',
+  '"Don\'t stop when you\'re tired. Stop when you\'re done."',
+  '"Small steps every day lead to big changes."',
+  '"Your future self will thank you for the work you do today."',
+  '"Discipline is choosing between what you want now and what you want most."',
+];
+
+// ── STATE ──
+const KEY = 'nethmi_glow_v3';
+let state = {
+  weights:[{date:'Jun 1',val:72,raw:new Date('2026-06-01').getTime()}],
+  checks:{}, workoutDays:{}, logs:{}, qIdx:0,
+};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+function load(){try{const s=localStorage.getItem(KEY);if(s)state=JSON.parse(s)}catch(e){}}
+
+// ── LOG STATE ──
+let logDate = new Date();
+logDate.setHours(0,0,0,0);
+let currentMood='', currentMotoScore=0, currentLogGoals={};
+
+function logDateKey(){return logDate.toISOString().slice(0,10)}
+function logDateLabel(){
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  return `${days[logDate.getDay()]}, ${logDate.getDate()} ${months[logDate.getMonth()]} ${logDate.getFullYear()}`;
+}
+
+function changeLogDay(delta){
+  logDate.setDate(logDate.getDate()+delta);
+  loadLogDay();
+}
+function goToday(){logDate=new Date();logDate.setHours(0,0,0,0);loadLogDay();}
+
+function loadLogDay(){
+  const key = logDateKey();
+  const isToday = key===new Date().toISOString().slice(0,10);
+  document.getElementById('log-title').textContent = isToday ? "Today's Log" : "Log for "+logDateLabel();
+  document.getElementById('log-date-label').textContent = logDateLabel();
+
+  const entry = state.logs[key]||{};
+  currentMood = entry.mood||'';
+  currentMotoScore = entry.motoScore||0;
+  currentLogGoals = entry.goals||{};
+
+  document.getElementById('log-did').value = entry.did||'';
+  document.getElementById('log-ate').value = entry.ate||'';
+  document.getElementById('log-wins').value = entry.wins||'';
+  document.getElementById('log-moto').value = entry.motoNote||'';
+
+  // mood buttons
+  document.querySelectorAll('.mood-btn').forEach(b=>{
+    b.classList.toggle('selected', b.dataset.m===currentMood);
+  });
+
+  // motivation scale
+  renderMotoScale();
+
+  // goal checklist
+  renderLogGoals();
+
+  document.getElementById('save-confirm').style.display='none';
+}
+
+function setMood(m, btn){
+  currentMood=m;
+  document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function renderMotoScale(){
+  const el = document.getElementById('moto-scale');
+  el.innerHTML = Array.from({length:10},(_,i)=>{
+    const v=i+1;
+    const sel = v<=currentMotoScore;
+    return `<button onclick="setMotoScore(${v})" style="width:36px;height:36px;border-radius:8px;border:1.5px solid ${sel?'var(--purple)':'var(--border)'};background:${sel?'var(--purple)':'var(--surface2)'};color:${sel?'#fff':'var(--text2)'};font-size:13px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all 0.2s">${v}</button>`;
+  }).join('');
+}
+
+function setMotoScore(v){
+  currentMotoScore = v;
+  renderMotoScale();
+}
+
+function renderLogGoals(){
+  const el = document.getElementById('log-goals-list');
+  el.innerHTML = LOG_GOALS.map((g,i)=>{
+    const done = currentLogGoals[i];
+    return `<div class="log-goal-check ${done?'ticked':''}" onclick="toggleLogGoal(${i})">
+      <div class="gc-box">${done?'<svg width="12" height="10" viewBox="0 0 12 10"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/></svg>':''}</div>
+      <div class="gc-text">${done?'✓ ':''} ${g}</div>
+    </div>`;
+  }).join('');
+}
+
+function toggleLogGoal(i){
+  currentLogGoals[i] = !currentLogGoals[i];
+  renderLogGoals();
+}
+
+function saveLog(){
+  const key = logDateKey();
+  state.logs[key] = {
+    mood:currentMood,
+    motoScore:currentMotoScore,
+    goals:{...currentLogGoals},
+    did:document.getElementById('log-did').value,
+    ate:document.getElementById('log-ate').value,
+    wins:document.getElementById('log-wins').value,
+    motoNote:document.getElementById('log-moto').value,
+    savedAt:new Date().toISOString(),
+  };
+  save();
+  const confirm = document.getElementById('save-confirm');
+  confirm.style.display='block';
+  setTimeout(()=>confirm.style.display='none',3000);
+  renderPastLogs();
+}
+
+function clearLog(){
+  currentMood='';currentMotoScore=0;currentLogGoals={};
+  document.getElementById('log-did').value='';
+  document.getElementById('log-ate').value='';
+  document.getElementById('log-wins').value='';
+  document.getElementById('log-moto').value='';
+  document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('selected'));
+  renderMotoScale();
+  renderLogGoals();
+}
+
+function renderPastLogs(){
+  const entries = Object.entries(state.logs).sort((a,b)=>b[0].localeCompare(a[0]));
+  const el = document.getElementById('past-logs-list');
+  document.getElementById('log-count-badge').textContent = entries.length+' entries';
+  if(!entries.length){
+    el.innerHTML='<div style="font-size:13px;color:var(--text3);text-align:center;padding:1.5rem">No entries yet. Start logging today! 💜</div>';
+    return;
+  }
+  el.innerHTML = entries.map(([dateKey,e])=>{
+    const d = new Date(dateKey);
+    const dayName = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d.getDay()];
+    const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const label = `${dayName}, ${d.getDate()} ${monthNames[d.getMonth()]}`;
+    const goalsCount = Object.values(e.goals||{}).filter(Boolean).length;
+    const score = Math.round((goalsCount/LOG_GOALS.length)*100);
+    const scoreColor = score>=80?'var(--green)':score>=50?'var(--amber)':'var(--rose)';
+    return `<div class="past-log-item">
+      <div class="pli-header">
+        <div><div class="pli-date">${label}</div>${e.mood?`<div style="font-size:11px;color:var(--text3);margin-top:2px">Mood: ${e.mood}</div>`:''}</div>
+        <div style="text-align:right">
+          <div class="pli-score" style="background:${scoreColor}22;color:${scoreColor}">${score}% goals</div>
+          ${e.motoScore?`<div style="font-size:11px;color:var(--text3);margin-top:3px">Motivation: ${e.motoScore}/10</div>`:''}
+        </div>
+      </div>
+      ${e.did?`<div class="pli-section"><label>What I did</label><p>${e.did}</p></div>`:''}
+      ${e.ate?`<div class="pli-section"><label>What I ate</label><p>${e.ate}</p></div>`:''}
+      ${e.wins?`<div class="pli-section"><label>Wins & notes</label><p>${e.wins}</p></div>`:''}
+      ${goalsCount>0?`<div class="pli-goals">${Object.entries(e.goals||{}).filter(([,v])=>v).map(([i])=>`<span class="pli-goal-chip" style="background:var(--green-pale);color:var(--green);border-color:#7ecfa8">✓ ${LOG_GOALS[i]}</span>`).join('')}</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+// ── DASHBOARD ──
+function renderDashboard(){
+  const last=state.weights[state.weights.length-1]?.val||72;
+  const lost=Math.max(0,72-last);
+  const pct=Math.min(100,Math.round((lost/8)*100));
+  const end=new Date('2026-08-01');
+  const now=new Date();
+  const daysLeft=Math.max(0,Math.ceil((end-now)/86400000));
+  const weekDone=Object.values(state.workoutDays).filter(Boolean).length;
+
+  document.getElementById('h-cur').textContent=last.toFixed(1);
+  document.getElementById('h-lost').textContent=lost.toFixed(1);
+  document.getElementById('h-days').textContent=daysLeft;
+  document.getElementById('h-streak').textContent=weekDone+'🔥';
+  document.getElementById('big-w').textContent=last.toFixed(1);
+  document.getElementById('streak-num').textContent=weekDone;
+
+  const diff=72-last;
+  const diffEl=document.getElementById('w-diff');
+  if(diff===0){diffEl.textContent='Starting weight';diffEl.style.color='var(--text3)'}
+  else if(diff>0){diffEl.textContent=`↓ ${diff.toFixed(1)} kg lost — great work!`;diffEl.style.color='var(--green)'}
+  else{diffEl.textContent=`↑ ${Math.abs(diff).toFixed(1)} kg above start`;diffEl.style.color='var(--rose)'}
+
+  document.getElementById('pct-lbl').textContent=pct+'%';
+  document.getElementById('goal-bar').style.width=pct+'%';
+  document.getElementById('wk-lbl').textContent=`${weekDone}/6 days`;
+  document.getElementById('wk-bar').style.width=Math.round((weekDone/6)*100)+'%';
+
+  // weight history
+  const hist=document.getElementById('w-hist');
+  if(state.weights.length>1){
+    hist.innerHTML=state.weights.slice(-6).reverse().map((w,i,a)=>{
+      const prev=a[i+1];
+      let d='';
+      if(prev){const delta=prev.val-w.val;if(delta>0)d=`<span class="d-down">↓${delta.toFixed(1)}</span>`;else if(delta<0)d=`<span class="d-up">↑${Math.abs(delta).toFixed(1)}</span>`}
+      return `<div class="w-row"><span class="w-date">${w.date}</span><span class="w-val">${w.val} kg</span>${d}</div>`;
+    }).join('');
+  }else{
+    hist.innerHTML='<div style="font-size:12px;color:var(--text3);padding:8px 0">Log your weight to see history</div>';
+  }
+
+  // checklist
+  const done=CHECKLIST.filter(c=>state.checks[c.id]).length;
+  document.getElementById('chk-badge').textContent=`${done}/10`;
+  document.getElementById('comp-txt').textContent=`${done} of 10 goals done`;
+  document.getElementById('comp-bar').style.width=Math.round((done/10)*100)+'%';
+  document.getElementById('all-done').classList.toggle('show',done===10);
+
+  document.getElementById('chk-list').innerHTML=CHECKLIST.map(c=>{
+    const isDone=state.checks[c.id];
+    return `<div class="chk-item ${isDone?'done':''}" onclick="toggleCheck('${c.id}')">
+      <div class="chk-box">${isDone?'<svg width="12" height="10" viewBox="0 0 12 10"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/></svg>':''}</div>
+      <div class="chk-em">${c.e}</div>
+      <div><div class="chk-text">${c.t}</div><div class="chk-sub">${c.s}</div></div>
+    </div>`;
+  }).join('');
+
+  // week grid
+  const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const types=['work','work','work','work','work','active','rest'];
+  const todayI=(new Date().getDay()+6)%7;
+  document.getElementById('wk-grid').innerHTML=days.map((d,i)=>{
+    const done2=state.workoutDays['d'+i];
+    const isRest=types[i]==='rest';
+    const cls=isRest?'rest':(done2?'done':'');
+    const today=i===todayI?'today-mark':'';
+    return `<div class="wk-day ${cls} ${today}" onclick="${isRest?'':` toggleDay(${i})`}">
+      <span class="dn">${d}</span>
+      <span class="ds">${isRest?'😴':(done2?'✓':'○')}</span>
+    </div>`;
+  }).join('');
+
+  // date + quote
+  const now2=new Date();
+  const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const dayNames=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const start=new Date('2026-06-01');
+  const weekNum=Math.floor((now2-start)/(7*86400000))+1;
+  document.getElementById('today-date').textContent=`${dayNames[now2.getDay()]}, ${now2.getDate()} ${months[now2.getMonth()]} · Week ${Math.max(1,Math.min(9,weekNum))}`;
+  document.getElementById('moto-sub').textContent=`${daysLeft} days to go · You are capable of amazing things, Nethmi 💜`;
+  document.getElementById('q-text').textContent=QUOTES[state.qIdx%QUOTES.length];
+  document.getElementById('daily-quote').textContent=QUOTES[(state.qIdx+3)%QUOTES.length];
+
+  drawChart();
+}
+
+function drawChart(){
+  const svg=document.getElementById('wc');
+  const W=svg.clientWidth||820,H=svg.clientHeight||160;
+  const p={t:20,r:20,b:28,l:38};
+  const ww=W-p.l-p.r,hh=H-p.t-p.b;
+  const s0=new Date('2026-06-01').getTime(),s1=new Date('2026-08-01').getTime();
+  const tx=x=>p.l+((x-s0)/(s1-s0))*ww;
+  const ty=y=>p.t+hh-((y-62)/(74-62))*hh;
+
+  const yLbls=[64,66,68,70,72].map(y=>`<text x="${p.l-6}" y="${ty(y)+4}" font-size="10" fill="#9b92b8" text-anchor="end">${y}</text>`).join('');
+  const todX=tx(Date.now());
+  const tLine=`<line x1="${todX}" y1="${p.t}" x2="${todX}" y2="${H-p.b}" stroke="#9b7fd4" stroke-width="1" stroke-dasharray="3,3" opacity="0.6"/>
+  <text x="${todX}" y="${p.t-4}" font-size="9" fill="#9b7fd4" text-anchor="middle">today</text>`;
+  const targetPath=`M${tx(s0)},${ty(72)} L${tx(s1)},${ty(64)}`;
+  let actualPath='';
+  if(state.weights.length>0){
+    actualPath=state.weights.map((w,i)=>(i===0?'M':'L')+tx(w.raw||s0)+','+ty(w.val)).join(' ');
+  }
+  svg.innerHTML=`
+    ${yLbls}
+    <line x1="${p.l}" y1="${p.t}" x2="${p.l}" y2="${H-p.b}" stroke="#e8e3f5" stroke-width="1"/>
+    <line x1="${p.l}" y1="${H-p.b}" x2="${W-p.r}" y2="${H-p.b}" stroke="#e8e3f5" stroke-width="1"/>
+    ${tLine}
+    <path d="${targetPath}" stroke="#3aada0" stroke-width="1.5" fill="none" stroke-dasharray="5,3" opacity="0.6"/>
+    <text x="${W-p.r-2}" y="${ty(64)-6}" font-size="9" fill="#3aada0">goal</text>
+    ${actualPath?`<path d="${actualPath}" stroke="#9b7fd4" stroke-width="2.5" fill="none"/>` :''}
+    ${state.weights.map(w=>`<circle cx="${tx(w.raw||s0)}" cy="${ty(w.val)}" r="5" fill="#7c5cbf" stroke="white" stroke-width="2"/>`).join('')}
+  `;
+}
+
+// ── RENDER STATIC ──
+function renderWorkout(){
+  document.getElementById('wd-list').innerHTML=WORKOUTS.map(w=>`
+    <div class="wd-card">
+      <div class="wd-hd"><div class="wd-title">${w.e} ${w.day}</div><span class="badge ${w.c}">${w.badge}</span></div>
+      <div class="wd-ex">${w.ex.map(e=>`<span>${e}</span>`).join('')}</div>
+    </div>`).join('');
+  document.getElementById('sched-list').innerHTML=SCHED.map(s=>`
+    <div class="sched-row"><div class="sched-time">${s.t}</div><div class="sched-item">${s.i}</div></div>`).join('');
+}
+function renderNutrition(){
+  document.getElementById('meals-list').innerHTML=MEALS.map(m=>`
+    <div class="meal-card" style="border-left-color:${m.c}">
+      <div class="meal-time">${m.t}</div>
+      <div class="meal-name">${m.n}</div>
+      <div class="meal-desc">${m.d}</div>
+      <div class="meal-kcal">${m.k}</div>
+    </div>`).join('');
+  document.getElementById('avoid-list').innerHTML=AVOID.map(a=>`<div class="avoid-chip">${a}</div>`).join('');
+}
+function renderSkincare(){
+  const sk=(steps,id)=>{document.getElementById(id).innerHTML=steps.map(s=>`
+    <div class="sk-step">
+      <div class="sk-num">${s.n}</div>
+      <div><div class="sk-prod">${s.p}</div><div class="sk-how">${s.h}</div></div>
+    </div>`).join('');};
+  sk(AM_SKIN,'am-skin');sk(PM_SKIN,'pm-skin');
+}
+function renderTimeline(){
+  document.getElementById('tl-list').innerHTML=TL.map(t=>`
+    <div class="tl-item">
+      <div class="tl-dot ${t.final?'g':''}"></div>
+      <div class="tl-week">${t.w}</div>
+      <div class="tl-goal" style="${t.final?'color:var(--green)':''}">${t.g}</div>
+      <div class="tl-detail">${t.d}</div>
+    </div>`).join('');
+}
+
+// ── ACTIONS ──
+function showTab(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(btn)btn.classList.add('active');
+  if(id==='daily-log'){loadLogDay();renderPastLogs();}
+}
+function logWeight(){
+  const v=parseFloat(document.getElementById('w-in').value);
+  if(isNaN(v)||v<40||v>150)return;
+  const now=new Date();
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  state.weights.push({date:`${now.getDate()} ${months[now.getMonth()]}`,val:v,raw:now.getTime()});
+  save();renderDashboard();
+  document.getElementById('w-in').value='';
+}
+function toggleCheck(id){state.checks[id]=!state.checks[id];save();renderDashboard();}
+function toggleDay(i){state.workoutDays['d'+i]=!state.workoutDays['d'+i];save();renderDashboard();}
+function resetWeek(){if(confirm('Reset this week\'s workout grid?')){state.workoutDays={};save();renderDashboard();}}
+function nextQuote(){state.qIdx=(state.qIdx+1)%QUOTES.length;save();document.getElementById('q-text').textContent=QUOTES[state.qIdx];}
+
+document.getElementById('w-in').addEventListener('keydown',e=>{if(e.key==='Enter')logWeight();});
+
+// ── INIT ──
+load();
+renderDashboard();
+renderWorkout();
+renderNutrition();
+renderSkincare();
+renderTimeline();
+loadLogDay();
+renderPastLogs();
+window.addEventListener('resize',drawChart);
+</script>
+</body>
+</html>
